@@ -1,0 +1,66 @@
+/*
+    This is a project for Internet Engineering Course - Fall 2022
+    Mid-term Exam.
+ 
+*/
+
+/* 
+    some features must be apllied on html body.
+    setting the background image and its settings, font, display layout.
+*/
+body {
+    background-image: url("img/background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+
+    font-family: Tahoma;
+    justify-content: center;
+    display: flex;
+}
+
+/*
+    for texts we have inside divs, we can set some settings on them.
+*/
+div {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: medium;
+}
+
+/*
+    flex-container is a section in our html code. It contains two blocks:
+    the search box and user information. also we can say all other elements
+    appear inside this container. also we want this container has transparent background
+    and flex display layout. also it must be vertical and horizontal align
+*/
+.flex-container {
+    background-color: #b6b29b21;
+    box-shadow: 0 0 100px #3ab3c4b0;
+    border-radius: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 80vh;
+    width: 80vh;
+    max-width: 1500px;
+}
+
+/*
+    We can set padding and margine for search box div.
+*/
+div.search-box {
+    padding: 10px;
+    margin: 5px;
+}
+
+/*
+    We can set padding and margine for user information div.
+*/
+div.user-information {
+    padding: 10px;
+    margin: 5px;
+}
