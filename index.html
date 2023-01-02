@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> MY GITHUB </title>
+        <title> My Github </title>
         <meta charset="UTF-8">
         <meta name="author" content="Rahmani">
         <link href="./css/style.css" rel="stylesheet" type="text/css" />
         <link href="./img/icon.png" rel="shortcut icon" type="image/x-icon"/>
-        <script src="./js/script.js"></script>
+        
 
     </head>
 
     <body>
-
+        <section class="flex-container">
+            <div class="search-box">
+                <input type="text" name="username" placeholder="Enter Username">
+                <button type="button" id="submit">Get Info</button> 
+            </div>
+            <div class="user-information">
+                <div class="header">
+                    <img src="img/default_profile.png" id="prof-img">
+                    <p class="info">
+                        <span class="bold" id="complete-name">complete name</span>
+                        </br>
+                        <span id="blog-addr">Blog address</span>
+                        </br>
+                        <span id="location">City, Country</span>
+                    </p>
+                </div>
+                <div class="footer">
+                    <span id="bio">Bio</span>
+                    </br>
+                    <span id="prog-lang">Programming Language</span>
+                </div>
+            </div>
+        </section>
+        <script src="./js/script.js"></script>
     </body>
 </html>
