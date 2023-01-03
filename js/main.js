@@ -24,10 +24,18 @@
         let userData = window.localStorage.getItem(username)
 
         if(userData == null){
-            userData = fetchData(baseURL+username)
-
+            userData = myFetch(baseURL+username)
+            userData.then((data)=>{
+                if(data != undefined){
+                    data["intrested_lang"] = findIntrestedLanguage(userData["repos_url"])
+                    updateUserInfo(data) 
+                    saveInfo(username, JSON.stringify(data))
+                }
+                return
+            })
         }else{
-
+            console.log("read data from cache for user: "+ username)
+            updateUserInfo(JSON.parse(userData))
         }
     }
 
@@ -36,7 +44,7 @@
         we have set some error message for some 400 family codes. if we have some problems
         in network connection we should set appropriate message.
     */
-    async function fetchData(url) {
+    async function myFetch(url) {
         try {
             let response = await fetch(url)
             if (!response.ok) {
@@ -57,23 +65,49 @@
         }   
     }
 
+    /*
+        function below find the more intrested language of user
+        for this job we find the 5 last pushed and then find the mostly
+        used language in them
+    */
+    function findIntrestedLanguage(reposURL){
+        // first we should fetch data related to repos with myFetch
+        reposData = myFetch(reposURL)
+        
+        // then we should sort repos according to their push time (pushed_at field)
+        let repos = null
+        reposData.then((val)=>{
+            val.sort((a, b)=>{
+                return a.pushed_at < b.pushed_at
+            })
+            repos = val
+        })
+        // now we should find high-scored language among 5 or less last pushed repos
+        // if repos count was less than 5
+        let numberOfCheckRepository = Math.min(repos.length, 5);
+        console.log("number is",numberOfCheckRepository) 
+        let langScore = new Array()
+        let intrestedLang = "" 
+        let highestScore = 0
+        for(let i = 0; i < numberOfCheckRepository ; i++){
+            if(repos[i]["language"] !== null){
+                if(repos[i]["language"] in langScore){
+                    langScore[repos[i]["language"]]++
+                }else
+                    langScore[repos[i]["language"]] = 1
+                if(langScore[repos[i]["language"]] > highestScore){
+                    highestScore = langScore[repos[i]["language"]]
+                    intrestedLang = repos[i]["language"]
+                }
+            }
+        }  
+        return intrestedLang
+    }
+
     // save user information in localstorage
     function saveInfo(username, userData){
         console.log("saving:"+userData)
         window.localStorage.setItem(username, userData)
-    }
-    /*
-
-    */
-    function showError(text) {
-        errorWrapper.style.width = '100%'
-        errorWrapper.textContent = text
-        console.log('timeout staretd')
-        setTimeout(() => {
-            console.log('timeout finished')
-            errorWrapper.style.width = '0'
-            errorWrapper.textContent = ''
-        }, 4000)
     }
 
     /*
@@ -112,12 +146,26 @@
             bio.innerText = userData["bio"]
         }
         
-        if(userData["max_lang"] == undefined){
-            reposUrl = userData["repos_url"]
-            return sortRepos(reposUrl)
+        if(userData["intrested_lang"] == "" || userData["intrested_lang"] == null){
+            progLang.innerText = "Intrested language not set"
         }
-        else
-            setTopLanguage(userData["max_lang"])
+        else{
+            progLang.innerText = userData["intrested_lang"]
+        }
+    }
+
+    /*
+
+    */
+    function showError(text) {
+        errorWrapper.style.width = '100%'
+        errorWrapper.textContent = text
+        console.log('timeout staretd')
+        setTimeout(() => {
+            console.log('timeout finished')
+            errorWrapper.style.width = '0'
+            errorWrapper.textContent = ''
+        }, 4000)
     }
 }
 )
