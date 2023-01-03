@@ -13,24 +13,32 @@
     <body>
         <section class="flex-container">
             <div class="user-information">
+                <div id="message-box" class="general-message info">
+                    <div id="message-text">Enter a username to get user's info.</div>
+                    <span class="close-btn" onclick="hideMessage()">&times;</span>
+                </div>
                 <div class="header">
-                    <img src="img/default_profile.png" id="prof-img">
-                    <p class="info">
-                        <span class="bold" id="complete-name">complete name</span>
-                        </br>
-                        <span id="blog-addr">Blog address</span>
-                        </br>
-                        <span id="location">City, Country</span>
-                    </p>
+                    <img id="avatar" src="img/default_profile.png">
+                    <div class="information">
+                        <p class="text">
+                            <span id="complete-name" class="bold">Complete name</span>
+                            </br>
+                            <span id="blog-addr">Blog address</span>
+                            </br>
+                            <span id="location">City, Country</span>
+                        </p>
+                    </div>
                 </div>
                 <div class="footer">
-                    <span id="bio">Bio</span>
-                    </br>
-                    <span id="prog-lang">Programming Language</span>
+                    <p class="text">
+                        <span id="bio">Bio</span>
+                        </br>
+                        <span id="prog-lang">Programming Language</span>
+                    </p>
                 </div>
             </div>
             <div class="search-box">
-                <input type="text" name="username" placeholder="Enter Username"/>
+                <input type="text" id="username" name="username" placeholder="Enter Username"/>
                 <button type="button" id="submit">Get Info</button> 
             </div>
         </section>

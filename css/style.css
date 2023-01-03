@@ -31,6 +31,16 @@ div {
     font-size: medium;
 }
 
+.bold{
+    font-weight: bold;
+}
+
+.text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
 /*
     flex-container is a section in our html code. It contains two blocks:
     the search box and user information. also we can say all other elements
@@ -39,14 +49,14 @@ div {
 */
 .flex-container {
     background-color: #877cec21;
-    box-shadow: 0 0 100px #3ab3c4b0;
+    box-shadow: 0 0 100px #c3eaf0b0;
     border-radius: 35px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    height: 80vh;
+    height: 70vh;
     width: 120vh;
     max-width: 1500px;
 }
@@ -61,7 +71,7 @@ div.search-box {
 
 .search-box {  
     background-color: #877cec21;
-    box-shadow: 0 0 70px #3ab4c4a1;
+    box-shadow: 0 0 40px #a5ebf5a1;
     border-radius: 20px;
 
     display: flex;
@@ -71,6 +81,34 @@ div.search-box {
 
     width: 25%;
     height: 50%;
+}
+
+#username {
+    border-radius: 5px;
+    padding: 5px;
+    width: 75%;
+}
+
+#submit{
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: .1s ease-in;
+    
+    outline: none;
+    font-weight: bold;
+    
+    margin-top: 15px;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+#submit:hover {
+    background-color: #7cb7bd;
+}
+
+#submit:active {
+    background-color: #2973af; 
 }
 
 /*
@@ -86,7 +124,7 @@ div.user-information {
 */
 .user-information {
     background-color: #877cec21;
-    box-shadow: 0 0 70px #3ab4c4a1;
+    box-shadow: 0 0 40px #a5ebf5a1;
     border-radius: 20px;
 
     display: flex;
@@ -110,21 +148,91 @@ div.user-information {
     justify-content: center;
     align-items: center;
 
-    height: 50%;
+    height: 40%;
     width: 100%;
 
 }
 
 .footer{
-    padding: 20px;
+    display: flex;
+
+    margin-left: 10px;
     
+    padding: 30px;
+    line-height: 2em;
+
     height: 50%;
     width: 100%;
 }
 
-#prof-img{
+#avatar{
     border-radius: 35%;
 
-    height: 50%;
+    height: 60%;
     width: auto; 
+    padding: 10px;
+}
+
+.information{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    margin: 5px;
+    line-height: 1.7em;
+
+    height: 90%;
+    width: 60%; 
+}
+
+#message-box {
+    /*position: absolute;*/
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 999;
+    /* display: none; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.general-message {
+    padding: 20px;
+    color: white;
+}
+/* red background color for alers */
+.alert {
+    background-color: #f44336;
+}
+
+/* yellow background color for warnings */
+.warn {
+    background-color: #ff9800;
+}
+
+/* blue background color for information */
+.info {
+    background-color: #006ed4;
+}
+/*
+  little times sign style.
+  float right becase in english all close btns are right :)
+  transitino because of Aesthetics
+*/
+.close-btn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: black;
 }
