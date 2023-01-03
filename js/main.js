@@ -25,6 +25,7 @@
 
         if(userData == null){
             userData = fetchData(baseURL+username)
+
         }else{
 
         }
@@ -79,7 +80,7 @@
         userData (maybe from local storage or from http get) can be updated 
         from js. we update user info fields in html by this function.
     */
-    function updateInfo(userData){
+    function updateUserInfo(userData){
 
         if(userData["avatar_url"] == "" || userData["avatar_url"] == null){
             userImg.src = "img/notfound.png"
