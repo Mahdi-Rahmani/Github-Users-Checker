@@ -1,12 +1,15 @@
 /*
     This is a project for Internet Engineering Course - Fall 2022
     Mid-term Exam.
- 
+    @author : Mahdi Rahmani
 */
 
 /* 
     some features must be apllied on html body.
     setting the background image and its settings, font, display layout.
+    minimum height is set to 100v and our display is flex. we dont want
+    background image to be repeated. we want the element that will placed inside it
+    are in center.
 */
 body {
     background-image: url("../img/background.png");
@@ -24,6 +27,8 @@ body {
 
 /*
     for texts we have inside divs, we can set some settings on them.
+    I set white color. the font size is set medium. this block operate on
+    all dives.
 */
 div {
     color: white;
@@ -33,6 +38,7 @@ div {
 
 /*
     bold classes have same properties so we set them seperate here
+    the font of the classes specify by bold should be bold.
 */
 .bold{
     font-weight: bold;
@@ -40,7 +46,9 @@ div {
 }
 
 /*
-    also we have same properties for text class
+    also we have same properties for text class. if the text are too much
+    we say go to next line and if they have space we can break according to that.
+    also alow long words to be able to be broken and wrap onto the next line.
 */
 .text{
     overflow: hidden;
@@ -73,7 +81,8 @@ div {
 */
 div.search-box {
     padding: 10px;
-    margin: 100px;
+    margin: 120px;
+    margin-left: 170px;
 }
 
 /*
@@ -235,77 +244,61 @@ div.user-information {
     width: 60%; 
 }
 
+/*
+    for bio and prog-lang id set color beacuse it helps to be more attractive
+    and also to be distingushable
+*/
+#bio{
+    color: coral;
+}
+
+#prog-lang{
+    color: cornflowerblue;
+}
+
 /* 
-    error div settings for the bottom of the page.
+    error div settings.
+    if an error ocurred we show it by red background in the search box.
+    the color of text is white and in the center of background. fontsize is14px,
+    at the begining we dont want to show it so display is set to none.
 */
 .error {
-    position: fixed;
-    width: 0;
-    
-    display: flex;
+    width: 70%;
+    height: 30%;
+
+    margin-top: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    display: none;
     align-items: center;
     justify-content: center;
     
-    height: 10vh;
     color: white;
-    background-color: rgb(231, 67, 67);
+    background-color: rgb(205, 51, 51);
 
-    font-size: 18px;
-
-    left: 0;
-    bottom: 0;
-    transition: width 5s ease-in-out;
+    font-size: 14px;
 }
 
-
-
-#message-box {
-    /*position: absolute;*/
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 999;
-    /* display: none; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.general-message {
-    padding: 20px;
-    color: white;
-}
-/* red background color for alers */
-.alert {
-    background-color: #f44336;
-}
-
-/* yellow background color for warnings */
-.warn {
-    background-color: #ff9800;
-}
-
-/* blue background color for information */
-.info {
-    background-color: #006ed4;
-}
-/*
-  little times sign style.
-  float right becase in english all close btns are right :)
-  transitino because of Aesthetics
+/* 
+    catch div settings.
+    if data read from catch we show a message at the bottum of info box.
+    the message has red color and at the begining we dont want to show it 
+    so display is set to none.
 */
-.close-btn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+.catch {
+    width: 70%;
+    height: 30%;
 
-.close-btn:hover {
-    color: black;
+    margin-top: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+    
+    color: rgb(239, 77, 77);
+
+    font-size: 14px;
 }
