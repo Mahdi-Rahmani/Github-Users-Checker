@@ -1,5 +1,16 @@
+/*
+    This is a project for Internet Engineering Course - Fall 2022
+    Mid-term Exam.
+    @author : Mahdi Rahmani
+*/
 
+/*
+    An IIFE is a good way to secure the scope. You can use IIFEs to prevent 
+    global variables' definition issues,alias variables, protect private data,
+    and avoid conflicts of using many libraries that export the same object name.
+*/
 (function iife(){
+
     // we can set some variables for html elements that we need here
     // elements in search box
     let usernameInput = document.getElementById("username")
@@ -12,13 +23,18 @@
     //elements in information footer
     let bio = document.getElementById("bio")
     let progLang = document.getElementById("prog-lang")
-    // element rlated to showing error
+    // element related to showing error
     let error = document.getElementById('error')
+    // element related to showing catch message
+    let catch_element = document.getElementById('catch')
 
     // github api for getting user info
     const baseURL = "https://api.github.com/users/"
 
-
+    // if the submit button clicked this fuction is going to be run.
+    // it concates the username with base url.
+    // first we see if the user in the local storage so doesnt need th fetch again.
+    // if the user isnt in local storage we should call fetch function. 
     submitButton.onclick = function(){
         let username = usernameInput.value;
         // get data of user from localStorage if exist. 
@@ -43,9 +59,23 @@
         }else{
             console.log("read data from cache for user: "+ username)
             updateUserInfo(JSON.parse(userData))
+            catch_message("(read data from cache for user: "+ username+" by Local storage)")
         }
     }
 
+    /*
+        This function is used for showing catch data. show the message for 7 seconds.
+    */
+    function catch_message(text){
+        catch_element.style.display = 'flex'
+        catch_element.textContent = text
+        setTimeout(() => {
+
+            catch_element.style.display = 'none'
+            catch_element.textContent = ''
+    
+        }, 7000)
+    }
     /* 
         with fetch we can send a http request. during this process may occur some problems.
         we have set some error message for some 400 family codes. if we have some problems
@@ -78,6 +108,7 @@
             val.sort((a, b)=>{
                 return a.pushed_at < b.pushed_at
             })
+            let repos = val
             let langScore = new Array()
             let numberOfCheckRepository = Math.min(repos.length, 5);
             let intrestedLang = ""
@@ -155,23 +186,24 @@
     }
 
     /*
-
+        show the text as error message in the error div.
+        set timeout for hiding error message after 5 seconds from screen.
     */
     function showError(status) {
-        let error_msg = `Error in getting user info with error ${status}`
+        let error_msg = `Error in getting user info with error: ${status}`
         
         if (status == 404)
             error_msg = "User not found."
         if (status == 403)
             error_msg = "Forbidden (Maybe because of rate limit.)"
         
-        error.style.width = '50%'
+        error.style.display = 'flex'
         error.textContent = error_msg
 
         setTimeout(() => {
 
-            errorWrapper.style.width = '0'
-            errorWrapper.textContent = ''
+            error.style.display = 'none'
+            error.textContent = ''
 
         }, 5000)
 
