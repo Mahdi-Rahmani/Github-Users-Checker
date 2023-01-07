@@ -81,7 +81,7 @@ div {
 */
 div.search-box {
     padding: 10px;
-    margin: 120px;
+    margin: 110px;
     margin-left: 170px;
 }
 
@@ -176,7 +176,7 @@ div.user-information {
     font-size: 26px;
 
     width: 40%;
-    height: 75%;
+    height: 80%;
 }
 
 /* 
@@ -208,7 +208,7 @@ div.user-information {
 
     margin-left: 10px;
     
-    padding: 30px;
+    padding: 22px;
     line-height: 2em;
 
     height: 50%;
@@ -300,5 +300,5 @@ div.user-information {
     
     color: rgb(239, 77, 77);
 
-    font-size: 14px;
+    font-size: 13px;
 }
