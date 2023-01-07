@@ -1,5 +1,5 @@
 
-(function (){
+(function iife(){
     // we can set some variables for html elements that we need here
     // elements in search box
     let usernameInput = document.getElementById("username")
@@ -12,6 +12,8 @@
     //elements in information footer
     let bio = document.getElementById("bio")
     let progLang = document.getElementById("prog-lang")
+    // element rlated to showing error
+    let error = document.getElementById('error')
 
     // github api for getting user info
     const baseURL = "https://api.github.com/users/"
@@ -23,13 +25,18 @@
         // if that user is new the userData value is set to null
         let userData = window.localStorage.getItem(username)
 
+        console.log(baseURL+username)
         if(userData == null){
             userData = myFetch(baseURL+username)
             userData.then((data)=>{
                 if(data != undefined){
-                    data["intrested_lang"] = findIntrestedLanguage(userData["repos_url"])
-                    updateUserInfo(data) 
-                    saveInfo(username, JSON.stringify(data))
+                    console.log("hereee")
+                    intrested_lang = updateUserInfo(data)
+                    console.log(intrested_lang)
+                    intrested_lang.then(()=>{
+                        data["intrested_lang"] = progLang.innerText
+                        saveInfo(username, JSON.stringify(data))
+                    })
                 }
                 return
             })
@@ -47,22 +54,16 @@
     async function myFetch(url) {
         try {
             let response = await fetch(url)
-            if (!response.ok) {
-
-                if (response.status == 404)
-                    showError("User not found.")
         
-                if (response.status == 403)
-                    showError("Forbidden (Maybe because of rate limit.)")
-        
-                showError(`Error in getting user info with error ${response.status}`)
-            }else{
-                return response.json()
+            if(!response.ok) {
+                showError(response.status)
+                return Promise.reject(`Request failed with error ${response.status}`)
             }
+            return response.json()
         } catch(e) {
             console.log(e)
             showError("network error")
-        }   
+        }
     }
 
     /*
@@ -71,38 +72,33 @@
         used language in them
     */
     function findIntrestedLanguage(reposURL){
-        // first we should fetch data related to repos with myFetch
         reposData = myFetch(reposURL)
         
-        // then we should sort repos according to their push time (pushed_at field)
-        let repos = null
-        reposData.then((val)=>{
+        return reposData.then((val)=>{
             val.sort((a, b)=>{
                 return a.pushed_at < b.pushed_at
             })
-            repos = val
-        })
-        // now we should find high-scored language among 5 or less last pushed repos
-        // if repos count was less than 5
-        let numberOfCheckRepository = Math.min(repos.length, 5);
-        console.log("number is",numberOfCheckRepository) 
-        let langScore = new Array()
-        let intrestedLang = "" 
-        let highestScore = 0
-        for(let i = 0; i < numberOfCheckRepository ; i++){
-            if(repos[i]["language"] !== null){
-                if(repos[i]["language"] in langScore){
-                    langScore[repos[i]["language"]]++
-                }else
-                    langScore[repos[i]["language"]] = 1
-                if(langScore[repos[i]["language"]] > highestScore){
-                    highestScore = langScore[repos[i]["language"]]
-                    intrestedLang = repos[i]["language"]
+            let langScore = new Array()
+            let numberOfCheckRepository = Math.min(repos.length, 5);
+            let intrestedLang = ""
+            let highestScore = 0
+            for(let i = 0; i < numberOfCheckRepository; i++){
+                if(repos[i]["language"] !== null){
+                    if(repos[i]["language"] in langScore){
+                        langScore[repos[i]["language"]]++
+                    }else
+                        langScore[repos[i]["language"]] = 1
+                    if(langScore[repos[i]["language"]] > highestScore){
+                        highestScore = langScore[repos[i]["language"]]
+                        intrestedLang = repos[i]["language"]
+                    }
                 }
-            }
-        }  
-        return intrestedLang
+            }  
+
+            progLang.innerText = intrestedLang
+        })
     }
+    
 
     // save user information in localstorage
     function saveInfo(username, userData){
@@ -126,6 +122,8 @@
             blog.innerText = "blog: Has not been set"
         }else{
             blog.innerText = userData["blog"]
+            blog.href = userData["blog"]
+            
         }
 
         if(userData["name"] == "" || userData["name"] == null){
@@ -146,8 +144,10 @@
             bio.innerText = userData["bio"]
         }
         
-        if(userData["intrested_lang"] == "" || userData["intrested_lang"] == null){
-            progLang.innerText = "Intrested language not set"
+
+        if(userData["intrested_lang"] == undefined){
+            reposUrl = userData["repos_url"]
+            return findIntrestedLanguage(reposUrl)
         }
         else{
             progLang.innerText = userData["intrested_lang"]
@@ -157,15 +157,25 @@
     /*
 
     */
-    function showError(text) {
-        errorWrapper.style.width = '100%'
-        errorWrapper.textContent = text
-        console.log('timeout staretd')
+    function showError(status) {
+        let error_msg = `Error in getting user info with error ${status}`
+        
+        if (status == 404)
+            error_msg = "User not found."
+        if (status == 403)
+            error_msg = "Forbidden (Maybe because of rate limit.)"
+        
+        error.style.width = '50%'
+        error.textContent = error_msg
+
         setTimeout(() => {
-            console.log('timeout finished')
+
             errorWrapper.style.width = '0'
             errorWrapper.textContent = ''
-        }, 4000)
+
+        }, 5000)
+
+        console.log(error)
     }
 }
-)
+)()

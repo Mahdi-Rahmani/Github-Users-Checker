@@ -31,10 +31,17 @@ div {
     font-size: medium;
 }
 
+/*
+    bold classes have same properties so we set them seperate here
+*/
 .bold{
     font-weight: bold;
+    font-size: large;
 }
 
+/*
+    also we have same properties for text class
+*/
 .text{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -57,7 +64,7 @@ div {
     align-items: center;
 
     height: 70vh;
-    width: 120vh;
+    width: 140vh;
     max-width: 1500px;
 }
 
@@ -69,6 +76,12 @@ div.search-box {
     margin: 100px;
 }
 
+/*
+    search box has a buttom and an input area
+    here we set the properties of search box class
+    set the back ground color and its radius.
+    also we should set its alignment(center of parent) and set display as flex
+*/
 .search-box {  
     background-color: #877cec21;
     box-shadow: 0 0 40px #a5ebf5a1;
@@ -83,12 +96,21 @@ div.search-box {
     height: 50%;
 }
 
+/*
+    for username id that related to input area we can set border radius and
+    also its padding and width. its width is equal to 75% of its parent
+*/
 #username {
     border-radius: 5px;
     padding: 5px;
     width: 75%;
 }
 
+/*
+    for submit id that related to submit button we can set border radius.
+    also we set that if cursor is going on that we can channge in showing
+    its width is 80% of its parent. also set margin on top section
+*/
 #submit{
     border-radius: 5px;
     border: none;
@@ -103,6 +125,10 @@ div.search-box {
     width: 80%;
 }
 
+/*
+    we can set that if cursor go on submit button and also if selected the 
+    back ground of that is going to be changed
+*/
 #submit:hover {
     background-color: #7cb7bd;
 }
@@ -116,11 +142,15 @@ div.search-box {
 */
 div.user-information {
     padding: 10px;
-    margin: 70px;
+    margin: 80px;
 }
 
 /*
-
+    user-information class contain two div. header and footer. 
+    we can set for this class some properties like back ground color
+    also I set a light shadow for that. the flex direction is set to column
+    and its alignment is center(elements inside that place in center of this class)
+    its width is 75% of its parent
 */
 .user-information {
     background-color: #877cec21;
@@ -140,6 +170,12 @@ div.user-information {
     height: 75%;
 }
 
+/* 
+    header is the upper div inside user-information box.
+    it contains user image and fullname and blog and location.
+    we set its size based on the info box size.
+    also we set some text and display settings here.
+*/
 .header{
     background-color: #958af362;
     border-radius: 20px;
@@ -153,6 +189,11 @@ div.user-information {
 
 }
 
+/* 
+    footer contains Bio and intrested programming language of the user.
+    it's a child of the info box.
+    we set it's size based on its parent.
+*/
 .footer{
     display: flex;
 
@@ -165,6 +206,10 @@ div.user-information {
     width: 100%;
 }
 
+/* 
+    also we set border-radius to 60% for having a semi circular image.
+    we set the size of the user image based on the height of the header div class.
+*/
 #avatar{
     border-radius: 35%;
 
@@ -173,6 +218,10 @@ div.user-information {
     padding: 10px;
 }
 
+/*
+    I set its size based on its parent. also we set some text and display settings here.
+    also prof info is a child of the info header.
+*/
 .information{
     display: flex;
     justify-content: center;
@@ -185,6 +234,30 @@ div.user-information {
     height: 90%;
     width: 60%; 
 }
+
+/* 
+    error div settings for the bottom of the page.
+*/
+.error {
+    position: fixed;
+    width: 0;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 10vh;
+    color: white;
+    background-color: rgb(231, 67, 67);
+
+    font-size: 18px;
+
+    left: 0;
+    bottom: 0;
+    transition: width 5s ease-in-out;
+}
+
+
 
 #message-box {
     /*position: absolute;*/

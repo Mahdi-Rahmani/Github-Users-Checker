@@ -11,24 +11,24 @@
     </head>
 
     <body>
+        <!-- the main box -->
         <section class="flex-container">
+            <!-- 1- user info box -->
             <div class="user-information">
-                <div id="message-box" class="general-message info">
-                    <div id="message-text">Enter a username to get user's info.</div>
-                    <span class="close-btn" onclick="hideMessage()">&times;</span>
-                </div>
+                <!-- 1-1 user info header that contains image and name and blog and location of user -->
                 <div class="header">
                     <img id="avatar" src="img/default_profile.png">
                     <div class="information">
                         <p class="text">
-                            <span id="complete-name" class="bold">Complete name</span>
+                            <span class="bold" id="complete-name">Complete name</span>
                             </br>
-                            <span id="blog-addr">Blog address</span>
+                            <span ><a id="blog-addr" >Blog address</a></span>
                             </br>
                             <span id="location">City, Country</span>
                         </p>
                     </div>
                 </div>
+                <!-- 1-2 user info footer that contains bio and intrested programming language of user -->
                 <div class="footer">
                     <p class="text">
                         <span id="bio">Bio</span>
@@ -37,11 +37,16 @@
                     </p>
                 </div>
             </div>
+            <!-- 2- search box -->
             <div class="search-box">
                 <input type="text" id="username" name="username" placeholder="Enter Username"/>
                 <button type="button" id="submit">Get Info</button> 
             </div>
         </section>
+
+        <!-- error message -->
+        <div class="error" id="error"></div>
+
         <script src="./js/main.js"></script>
     </body>
 </html>
